@@ -1,4 +1,3 @@
-from tokens import *    #TOKEN, API_ID, API_HASH
 from telethon import TelegramClient, events
 from telethon.tl.custom import Button
 import databaseconnection
@@ -6,7 +5,6 @@ import databaseconnection
 TOKEN = 'xxx'
 API_ID = 'xxx'
 API_HASH = 'xxx'
-
 
 password = 'ЦКБ2О23'
 admpassword = 'ЦКБАДМИН'
@@ -30,7 +28,6 @@ def return_order(order):
         order_sum = order_sum + int(order[i][1])
 
     return order_text, order_sum
-
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start(event):
@@ -59,9 +56,6 @@ async def start(event):
                                         await conv.send_message(f"{dish_text}", buttons=keyboard)
 
                             await conv.send_message('Заказ', buttons=([Button.inline('Посмотерть заказ', 'check')], [Button.inline('Завершить', 'end')]))
-
-
-
 
                             order = [] #[[order, price, amount], ...]
                             while True:
@@ -126,7 +120,6 @@ async def start(event):
             else:
                 await conv.send_message('Неверный код, для повторной попытки нажмите /start')
 
-
 @bot.on(events.NewMessage(pattern='/orders'))
 async def check_orders(event):
     sender = await event.get_sender()
@@ -160,7 +153,6 @@ async def done(event):
         await conv.send_message('Заказы завершены')
         data.clear_orders()
         capable_of_doing_orders = True
-
 
 if __name__ == '__main__':
     main()
